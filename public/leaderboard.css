@@ -1,0 +1,133 @@
+/* Reset and base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif, sans-serif;
+    background: linear-gradient(135deg, #004d25, #006633, #1b5e20, #004d40);
+    background-size: 300% 300%;
+    animation: gradientMove 10s ease infinite;
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 60px;
+}
+
+/* Animated gradient */
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+/* Navbar styles */
+.navbar {
+    background-color: #222;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: flex-start;
+    gap: 15px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3); 
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 15px;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+.nav-link:hover {
+    background-color: #444;
+}
+
+.nav-link.active {
+    background-color: #f39c12;
+    color: black;
+}
+
+/* Container for leaderboard */
+.leaderboard-container {
+    max-width: 1000px;
+    margin: 35px auto;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.5);
+}
+
+/* Title */
+h1 {
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    text-align: center;
+    color: #ffffff;
+}
+
+/* Table styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: white;
+}
+
+table th, table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: center;
+    vertical-align: middle;
+}
+
+table th {
+    background-color: #f39c12;
+    font-weight: 500;
+}
+
+table tr:nth-child(even) {
+    background-color: #3a3a3a;
+}
+
+table tr:hover {
+    background-color: #555;
+    cursor: pointer;
+}
+
+/* Make table container scrollable on small screens */
+@media (max-width: 1000px) {
+  .leaderboard-container {
+    padding: 1rem 0.5rem;
+  }
+
+  /* Wrap the table in a scroll container */
+  .table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
+  }
+
+  table {
+    width: 100%; /* keep full width inside scroll */
+    min-width: 600px; /* minimum width to allow scrolling */
+  }
+
+  table th, table td {
+    padding: 8px 10px;
+    font-size: 0.85rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+}

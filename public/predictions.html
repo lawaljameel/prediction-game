@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Predictions</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+        <nav class="navbar">
+        <a class="nav-link" href="predictions.html" style="color:white; text-decoration:none;">Predictions</a>
+        <a class="nav-link" href="leaderboard.html" style="color:white; text-decoration:none;">Leaderboard</a>
+        </nav>
+    <div class="main-container">    
+        <div class="container">
+            <h1>Football Season Predictions</h1>
+            <p id="welcome-msg"></p>
+
+            <form id="prediction-form">
+
+                <label for="top6">Top 6 Teams (in order):</label>
+                <input type="text" id="top6" placeholder="Man City, Arsenal, ..." required>
+
+                <label for="bottom3">Bottom 3 Teams (in order):</label>
+                <input type="text" id="bottom3" placeholder="Luton, Burnley, ..." required>
+
+                <label for="firstManager">First Manager to be Sacked:</label>
+                <input type="text" id="firstManager" placeholder="Sean Dyche" required>
+
+                <label for="goldenBoot">Golden Boot Winner:</label>
+                <input type="text" id="goldenBoot" placeholder="Erling Haaland" required>
+
+                <label for="playerSeason">Player of the Season:</label>
+                <input type="text" id="playerSeason" placeholder="Bukayo Saka" required>
+
+                <label for="uclWinner">Champions League Winner:</label>
+                <input type="text" id="uclWinner" placeholder="Real Madrid" required>
+
+                <label for="faCupWinner">FA Cup Winner:</label>
+                <input type="text" id="faCupWinner" placeholder="Liverpool" required>
+
+                <label for="carabaoWinner">Carabao Cup Winner:</label>
+                <input type="text" id="carabaoWinner" placeholder="Chelsea" required>
+
+                <label for="europaWinner">Europa League Winner:</label>
+                <input type="text" id="europaWinner" placeholder="Bayer Leverkusen" required>
+
+                <button type="submit">Submit Predictions</button>
+            </form>
+        </div>
+    </div>
+    <script src="predictions.js"> 
+    </script>
+</body>
+
+</html>
