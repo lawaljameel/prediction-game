@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     const leaderboardTable = document.getElementById("leaderboard-body");
 
-    fetch("/api/server")
+    fetch("/api/server.js")
         .then(response => response.json())
         .then(data => {
             const rows = data.data || []; // backend returns { data: [...] }
