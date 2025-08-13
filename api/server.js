@@ -46,7 +46,14 @@ module.exports = async (req, res) => {
 
   if (req.method === 'POST' && req.query.route === 'add') {
     try {
-      const { username, values } = req.body;
+      let body = '';
+    await new Promise((resolve, reject) => {
+      req.on('data', chunk => (body += chunk));
+      req.on('end', resolve);
+      req.on('error', reject);
+    });
+
+    const { username, values } = JSON.parse(body || '{}');
 
       if (!username || typeof username !== 'string') {
         return res.status(400).json({ message: 'Username is required' });
