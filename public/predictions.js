@@ -34,7 +34,7 @@ document.getElementById("prediction-form").addEventListener("submit", function (
     };
 
     // Send to Node backend
-    fetch("/api/server.js", {
+    fetch("/api/server?route=add", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(predictionData)
