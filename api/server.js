@@ -27,11 +27,11 @@ const sheets = google.sheets({ version: 'v4', auth });
 
 // Main handler for Vercel
 module.exports = async (req, res) => {
-  if (req.method === 'GET' && req.query.action === 'ping') {
+  if (req.method === 'GET' && req.query.route === 'ping') {
     return res.status(200).json({ message: 'Server is running' });
   }
 
-  if (req.method === 'GET' && req.query.action === 'data') {
+  if (req.method === 'GET' && req.query.route === 'data') {
     try {
       const response = await sheets.spreadsheets.values.get({
         spreadsheetId: SPREADSHEET_ID,
@@ -44,7 +44,7 @@ module.exports = async (req, res) => {
     }
   }
 
-  if (req.method === 'POST' && req.query.action === 'add') {
+  if (req.method === 'POST' && req.query.route === 'add') {
     try {
       const { username, values } = req.body;
 
