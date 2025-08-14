@@ -152,13 +152,13 @@ button[disabled] {
 
 .alert {
     position: fixed;
-    top: 80px;
-    left: 50%;
-    transform: translateX(-50%);
+    bottom: 30px;
+    right: 30px;
+    transform: translateX(100%);
     padding: 1rem 1.5rem;
     border-radius: 6px;
     font-weight: bold;
-    text-align: center;
+    text-align: left;
     min-width: 250px;
     max-width: 90%;
     z-index: 9999;
@@ -184,7 +184,7 @@ button[disabled] {
 .alert.show {
     opacity: 1;
     pointer-events: auto;
-    transform: translate(-50%, 0);
+    transform: translateX(0);
 }
 
 
