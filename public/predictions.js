@@ -27,28 +27,37 @@ document.getElementById("prediction-form").addEventListener("submit", function (
         document.getElementById("europaWinner").value.trim()
     ];
 
-    // Prepare data for backend
-    const predictionData = {
-        username: username,  // matches backend requirement
-        values: values
-    };
-
-    // Send to Node backend
-    fetch("/api/server?route=add", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(predictionData)
-    })
-    .then(res => res.json())
-    .then(result => {
-        alert(result.message || "Predictions saved successfully!");
-        console.log(result);
-    })
-    .catch(err => {
-        console.error("Error saving predictions:", err);
-        alert("Something went wrong. Try again.");
-    });
+    // Call backend function
+    addPrediction(username, values);
 });
+
+// Function to add prediction
+async function addPrediction(username, values) {
+    try {
+        const response = await fetch('/api/server?route=add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: username,
+                values: values
+            })
+        });
+
+        const result = await response.json();
+        console.log(result);
+
+        if (!response.ok) {
+            alert(`Error: ${result.message}`);
+        } else {
+            alert('Prediction added successfully!');
+        }
+    } catch (error) {
+        console.error('Error adding prediction:', error);
+        alert('Failed to add prediction.');
+    }
+}
 
 // Highlight active navigation link
 document.addEventListener("DOMContentLoaded", () => {
