@@ -6,11 +6,8 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(data => {
             let rows = data.data || []; // backend returns { data: [...] }
 
-            // Remove the first row if it's the header row from the sheet
-            if (rows.length && rows[0][0] && rows[0][0].toLowerCase().includes("username")) {
-                rows = rows.slice(1);
-            }
-
+            rows = rows.slice(1);
+        
             leaderboardTable.innerHTML = "";
 
             rows.forEach((row, index) => {
