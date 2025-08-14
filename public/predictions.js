@@ -39,7 +39,7 @@ function showCustomAlert(message, type = "success") {
     // Remove after 3 seconds
     setTimeout(() => {
         alertBox.className = "alert";
-    }, 3000);
+    }, 7000);
 }
 
 // Handle form submission
