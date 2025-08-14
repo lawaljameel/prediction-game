@@ -1,3 +1,22 @@
+const infoBtn = document.getElementById("info-btn");
+const infoPopup = document.getElementById("info-popup");
+
+// Show popup on button click
+infoBtn.addEventListener("click", (e) => {
+    e.stopPropagation(); // Prevent closing immediately
+    infoPopup.style.display = "block";
+});
+
+// Hide popup when clicking anywhere else
+document.addEventListener("click", () => {
+    infoPopup.style.display = "none";
+});
+
+// Prevent closing when clicking inside the popup itself
+infoPopup.addEventListener("click", (e) => {
+    e.stopPropagation();
+});
+
 document.addEventListener("DOMContentLoaded", function () {
     const leaderboardTable = document.getElementById("leaderboard-body");
 
@@ -25,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     <td>${row[7] || ""}</td>   <!-- faCupWinner -->
                     <td>${row[8] || ""}</td>   <!-- carabaoWinner -->
                     <td>${row[9] || ""}</td>   <!-- europaWinner -->
-                `; // Removed timestamp (row[10])
+                `;
 
                 leaderboardTable.appendChild(tr);
             });

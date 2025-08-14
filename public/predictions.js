@@ -10,9 +10,45 @@ if (!username) {
     document.getElementById("welcome-msg").textContent = `Welcome, ${username}!`;
 }
 
+// Elements for popup info
+const infoBtn = document.getElementById("info-btn");
+const infoPopup = document.getElementById("info-popup");
+
+// Show popup on button click
+infoBtn.addEventListener("click", (e) => {
+    e.stopPropagation(); // Prevent closing immediately
+    infoPopup.style.display = "block";
+});
+
+// Hide popup when clicking anywhere else
+document.addEventListener("click", () => {
+    infoPopup.style.display = "none";
+});
+
+// Prevent closing when clicking inside the popup itself
+infoPopup.addEventListener("click", (e) => {
+    e.stopPropagation();
+});
+
+// Custom alert function
+function showCustomAlert(message, type = "success") {
+    const alertBox = document.getElementById("custom-alert");
+    alertBox.textContent = message;
+    alertBox.className = `alert ${type} show`;
+
+    // Remove after 3 seconds
+    setTimeout(() => {
+        alertBox.className = "alert";
+    }, 3000);
+}
+
 // Handle form submission
 document.getElementById("prediction-form").addEventListener("submit", function (e) {
     e.preventDefault();
+
+    const submitBtn = this.querySelector("button[type='submit']");
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = `Submitting <span class="spinner"></span>`;
 
     // Collect form values into an array
     const values = [
@@ -28,11 +64,11 @@ document.getElementById("prediction-form").addEventListener("submit", function (
     ];
 
     // Call backend function
-    addPrediction(username, values);
+    addPrediction(username, values, submitBtn, this);
 });
 
 // Function to add prediction
-async function addPrediction(username, values) {
+async function addPrediction(username, values, submitBtn, form) {
     try {
         const response = await fetch('/api/server?route=add', {
             method: 'POST',
@@ -49,13 +85,18 @@ async function addPrediction(username, values) {
         console.log(result);
 
         if (!response.ok) {
-            alert(`Error: ${result.message}`);
+            showCustomAlert(`Error: ${result.message}`, "error");
         } else {
-            alert('Prediction added successfully!');
+            showCustomAlert("Prediction added successfully!", "success");
+            form.reset(); // Clear the form
         }
     } catch (error) {
         console.error('Error adding prediction:', error);
-        alert('Failed to add prediction.');
+        showCustomAlert("Failed to add prediction.", "error");
+    } finally {
+        // Re-enable the button
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Submit";
     }
 }
 

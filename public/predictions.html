@@ -6,13 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Predictions</title>
     <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
 
         <nav class="navbar">
-        <a class="nav-link" href="predictions.html" style="color:white; text-decoration:none;">Predictions</a>
-        <a class="nav-link" href="leaderboard.html" style="color:white; text-decoration:none;">Leaderboard</a>
+            <div>
+            <a class="nav-link" href="predictions.html" style="color:white; text-decoration:none;">Predictions</a>
+            <a class="nav-link" href="leaderboard.html" style="color:white; text-decoration:none;">Leaderboard</a>
+            </div>
+            <!-- Info button in navbar -->
+            <button id="info-btn" class="info-btn">i</button>
+
+            <!-- Info pop-up -->
+            <div id="info-popup" class="info-popup">
+                <h3>Scoring System</h3>
+                <ul>
+                    <li><strong>Teams (Top6 & Bottom3)</strong>: Exact position: 3 pts, Correct team wrong position: 1 pt</li>
+                    <li><strong>First Manager to Leave</strong>: Correct manager: 5 pts</li>
+                    <li><strong>Golden Boot / Player of the Season</strong>: Correct player: 5 pts</li>
+                    <li><strong>UCL Winner</strong>: 5 pts, <strong>Other Cups</strong>: 2 pts each</li>
+                    <li><strong>Bonus:</strong> Perfect top6/bottom3: +5 pts, Perfect overall: +10 pts</li>
+                </ul>
+            </div>
         </nav>
     <div class="main-container">    
         <div class="container">
@@ -52,6 +69,8 @@
             </form>
         </div>
     </div>
+
+    <div id="custom-alert" class="alert hidden"></div>
     <script src="predictions.js"> 
     </script>
 </body>

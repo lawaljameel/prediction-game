@@ -89,3 +89,4 @@ module.exports = async (req, res) => {
   // If route/method not found
   return res.status(404).json({ message: 'Route not found' });
 };
+
