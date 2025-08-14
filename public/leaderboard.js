@@ -4,7 +4,12 @@ document.addEventListener("DOMContentLoaded", function () {
     fetch("/api/server?route=data")
         .then(response => response.json())
         .then(data => {
-            const rows = data.data || []; // backend returns { data: [...] }
+            let rows = data.data || []; // backend returns { data: [...] }
+
+            // Remove the first row if it's the header row from the sheet
+            if (rows.length && rows[0][0] && rows[0][0].toLowerCase().includes("username")) {
+                rows = rows.slice(1);
+            }
 
             leaderboardTable.innerHTML = "";
 
@@ -23,15 +28,14 @@ document.addEventListener("DOMContentLoaded", function () {
                     <td>${row[7] || ""}</td>   <!-- faCupWinner -->
                     <td>${row[8] || ""}</td>   <!-- carabaoWinner -->
                     <td>${row[9] || ""}</td>   <!-- europaWinner -->
-                    <td>${row[10] || ""}</td>  <!-- timestamp -->
-                `;
+                `; // Removed timestamp (row[10])
 
                 leaderboardTable.appendChild(tr);
             });
         })
         .catch(error => {
             console.error("Error fetching leaderboard:", error);
-            leaderboardTable.innerHTML = "<tr><td colspan='12'>Failed to load leaderboard.</td></tr>";
+            leaderboardTable.innerHTML = "<tr><td colspan='11'>Failed to load leaderboard.</td></tr>";
         });
 });
 
