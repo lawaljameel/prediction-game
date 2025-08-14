@@ -25,6 +25,21 @@ if (process.env.GOOGLE_CREDENTIALS) {
 
 const sheets = google.sheets({ version: 'v4', auth });
 
+// Helper to parse JSON body
+async function parseJsonBody(req) {
+  return new Promise((resolve, reject) => {
+    let body = '';
+    req.on('data', chunk => (body += chunk));
+    req.on('end', () => {
+      try {
+        resolve(JSON.parse(body || '{}'));
+      } catch (err) {
+        reject(err);
+      }
+    });
+  });
+}
+
 // Main handler for Vercel
 module.exports = async (req, res) => {
   if (req.method === 'GET' && req.query.route === 'ping') {
@@ -46,14 +61,7 @@ module.exports = async (req, res) => {
 
   if (req.method === 'POST' && req.query.route === 'add') {
     try {
-      let body = '';
-    await new Promise((resolve, reject) => {
-      req.on('data', chunk => (body += chunk));
-      req.on('end', resolve);
-      req.on('error', reject);
-    });
-
-    const { username, values } = JSON.parse(body || '{}');
+      const { username, values } = await parseJsonBody(req);
 
       if (!username || typeof username !== 'string') {
         return res.status(400).json({ message: 'Username is required' });
